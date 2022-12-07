@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Redaguoti įrašą {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-body">
+
+
+        <h2>Redaguoti kategoriją</h2>
+
+            <form action="#" method="POST" >
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Pakeisti kategoriją</button>
+            </form>
+
+        </div>
+  </div>
+</div>
+
+
+{% endblock %}

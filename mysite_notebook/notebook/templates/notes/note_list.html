@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %} Įrašai {% endblock %}
+
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/base.css'%}">
+{% endblock %}
+
+{% block content %}
+
+ {% if user.is_authenticated %}
+    <div>
+        <h4> {{user.username}}, turite šiuos užrašus </h4>
+    </div>
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+
+
+<div class="row align-content" id="note-list">
+
+    {% if notes %}
+        {% for note in notes%}
+        <div class="card m-1" style="width: 15rem;">
+            <div class="card-body">
+            <p> <small class="text-muted text-right">{{note.created|date:"y.m.d"}}</small>  -  <strong>{{note.category|capfirst}}</strong> </p>
+            <h6><a class="nav-link" href="{% url 'note_detail' note.id %}"> {{note.title|capfirst}} </a></h6>
+            <p class="card-text ">{{note.text|capfirst}}</p>
+
+            <a href="{% url 'update_note' note.id %}" class="btn btn-sm btn-outline-warning">Koreguoti irasa</a>
+            <a href="{% url 'note_delete' note.id %}" class="btn btn-sm btn-outline-danger"> Ištrinti </a>
+                <div>
+                {% if note.picture %}
+                <img src="{{ note.picture.url }}" alt="{{ note.title }}" style="width:100px;">
+                {% endif %}
+                </div>
+            </div>
+         </div>
+        {% endfor %}
+    {% else %}
+    <p>Įrašų nėra</p>
+    {% endif %}
+
+</div>
+
+
+
+{% endblock %}

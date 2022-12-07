@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load crispy_forms_tags %}
+
+{% block title %} Naujas įrašas {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="card card-signin">
+        <div class="card-body">
+
+
+        <h2>Naujas Įrašas</h2>
+
+            <p> <a class="p-2 text-bold" href="{% url 'upload_cat' %}">Sukurti naują kategoriją</a> </p>
+
+            <form action="{% url 'upload_note' %}" method="POST" >
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Užsaugoti įrašą</button>
+            </form>
+            <br>
+            <p> <a class="p-2 text-bold" href="{% url 'notes' %}"><< Grįžti</a> </p>
+
+        </div>
+  </div>
+</div>
+
+
+
+{% endblock %}

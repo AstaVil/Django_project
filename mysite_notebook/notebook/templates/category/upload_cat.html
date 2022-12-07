@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Nauja kategorija {% endblock %}
+
+{% block content %}
+
+<div class="container-fluid">
+
+        <div class="card">
+             <div class="card-body">
+
+            <form action="{% url 'upload_cat' %}" method="POST" >
+                {% csrf_token %}
+                {{ form|crispy }}
+                <button type="submit" class="btn btn-primary">Sukurti kategoriją</button>
+            </form>
+
+
+             </div>
+        </div>
+
+</div>
+
+
+{% endblock %}

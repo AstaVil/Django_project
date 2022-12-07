@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block title %} Kategorijos {% endblock %}
+
+{% block content %}
+
+<!--______________________________-->
+        <form method="GET">
+        {{ cat_filter.form }}
+<!--            <button type="submit" class="btn btn-sm btn-outline-secondary">Filtruoti</button>-->
+        </form>
+
+<!--         if cat_filter.qs -->
+<!--             for cat in cat_filter.qs -->
+<!--______________________________-->
+
+            <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th>Kategorijos</th>
+                    <th>Redaguoti</th>
+                    <th>Ištrinti</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% if categories %}
+            {% for cat in categories %}
+                <tr>
+                    <td>{{cat.cat_name}}</td>
+                    <td><a href="{% url 'update_cat' cat.id %}" class="btn btn-sm btn-outline-warning">Koreguoti </a></td>
+                    <td><a href="{% url 'cat_delete' cat.id %}" class="btn btn-sm btn-outline-danger"> Ištrinti</a></td>
+                </tr>
+            {% endfor %}
+            {% else %}
+            <p>Kategorijų nėra</p>
+            {% endif %}
+            </tbody>
+            </table>
+
+        </div>
+{% endblock %}

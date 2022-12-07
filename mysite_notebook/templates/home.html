@@ -1,0 +1,75 @@
+
+{% extends 'base.html' %}
+{% block title %} Pagrindinis {% endblock %}
+
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/base.css'%}">
+{% endblock %}
+
+{% block content %}
+<div class="col ">
+{% if user.is_authenticated %}
+<!---->
+        <h4> {{user.username|capfirst}}, turite šiuos užrašus </h4>
+        <a href="{% url 'upload_note' %}" class="btn btn-light" id="add" >Naujas irasas</a>
+        <br>
+
+{% else %}
+    <a href="{% url 'login' %}">Login</a>
+{% endif %}
+</div>
+
+<div class="row align-content" id="note-section">
+    {% if categories %}
+        {% for category in categories%}
+<div class="row m-2  align-content" >
+ <div class="card flex-container" style="max-width: 20rem;" id="cat">
+     <div class="card-header">
+                <h5> {{category.cat_name|capfirst}} </h5>
+
+                <div class="btn-group">
+                                <a href="{% url 'upload_note' %}" class="btn btn-sm btn-outline-success">+</a>
+                                <a href="{% url 'update_cat' category.id %}" class="btn btn-sm btn-outline-warning">U</a>
+                                <a href="{% url 'cat_delete' category.id %}" class="btn btn-sm btn-outline-danger ">X </a>
+                </div>
+     </div>
+     <div class="card-body" >
+                {% if notes %}
+                {% for note in notes%}
+                    {% if category.id == note.category_id %}
+
+
+                <div class="card-body" id="onenote">
+
+                        <p> <small class="text-muted text-right">{{note.created|date:"y.m.d"}}</small></p>
+                        <h6> {{note.title|capfirst}} </h6>
+                        <p class="card-text ">{{note.text|capfirst}}</p>
+
+                        {% if note.picture %}
+                        <img src="{{ note.picture.url }}" alt="{{ note.title }}" style="width:100px;">
+                        {% endif %}
+
+                        <div class="btn-toolbar justify-content-end" >
+                        <a href="{% url 'update_note' note.id %}" class="btn btn-sm btn-outline-warning">U</a>
+                        <a href="{% url 'note_delete' note.id %}" class="btn btn-sm btn-outline-danger">X</a>
+                        </div>
+                </div>
+                    {% endif %}
+
+                {% endfor %}
+                {% endif %}
+
+
+            </div>
+
+ </div>
+
+
+</div>
+
+{% endfor %}
+    {% endif %}
+</div>
+
+{% endblock %}

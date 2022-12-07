@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} Prisijungimas {% endblock %}
+
+
+
+{% block content %}
+
+<div class="card card-signin">
+    <div class="card-body">
+
+
+    <h4>Sveiki sugrįžę!</h4>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                 {{ field|as_crispy_field }}</p>
+            {% endfor %}
+            <button type="submit">Prisijungti</button>
+        </form>
+
+        <p>Neturite paskyros? <a href="{% url 'register' %}">Registuotis</a></p>
+
+
+    </div >
+<div class="m-2">
+    <p ><span style="color:red"> p.s. Sukurti vartotojai:</span> <span style="color:#5c0000">username: bandymas  pasword:bandymas </span>  | superuser: admin  password:admin</p>
+</div>
+</div>
+
+{% endblock content %}

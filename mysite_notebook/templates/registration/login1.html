@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+  <div class="row justify-content-center">
+    <div class="col-6">
+      <div class="card">
+        <div class="card-body">
+          <h2>Ptisijungti</h2>
+          <form method="post" novalidate>
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-primary">Prisijungti</button>
+            <a href="{% url 'password_reset' %}" class="btn btn-link">Pamiršote slaptažodį?</a>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

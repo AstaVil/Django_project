@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} Pagrindinis {% endblock %}
+
+{% load static %}
+{% block css_files %}
+<link rel="stylesheet" href="{% static 'css/base.css'%}">
+{% endblock %}
+
+
+{% block content %}
+  <h2>Index</h2>
+  <p>Prisijungėte kaip {% if user.is_authenticated %}{{ user.username }}{% else %}svecias{% endif %}!</p>
+  <div>
+      <a  class="btn btn-outline-secondary" href="{% url 'login' %}">Prisijungti</a>
+      <a  class="btn btn-outline-secondary" href="{% url 'register' %}">Registruotis</a>
+  </div>
+
+
+{% endblock %}
