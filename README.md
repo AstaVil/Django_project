@@ -1,5 +1,5 @@
-# Django_project
-Baigiamasis darbas Django
+# Django_project_notebook
+Django
 
 superuser: admin
 pasword: admin
